@@ -14,7 +14,7 @@ class ApplicationInstance(models.Model):
     client = models.ForeignKey('client', on_delete=models.CASCADE, related_name='applications')
     relationshipmanager = models.CharField(max_length=200, null=True, blank=True)
     live = models.BooleanField(default=False)
-    server = models.ManyToManyField('Server', blank=True, null=True)
+    server = models.ManyToManyField('Server')
 
 class Client(models.Model):
     name = models.CharField(max_length=200)
