@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Client, ApplicationInstance
+from .models import Client, ApplicationInstance, ServerGroup, Server
 from django.views import View
 
 def home(request):
@@ -32,3 +32,26 @@ class app_detail(View):
         context = {'app': app}
         return render(request, self.template_name, context)
     
+class server_detail(View):
+    template_name = 'server.html'
+
+    def get(self, request, pk):
+        server = get_object_or_404(Server, pk=pk)
+        context = {'server': server}
+        return render(request, self.template_name, context)
+    
+class servergroup_detail(View):
+    template_name = 'servergroup.html'
+
+    def get(self, request, pk):
+        servergroup = get_object_or_404(ServerGroup, pk=pk)
+        context = {'group': servergroup}
+        return render(request, self.template_name, context)
+    
+def servers(request):
+    servers = Server.objects.all()
+    return render(request, 'servers.html', {'servers': servers})
+
+def servergroups(request):
+    groups = ServerGroup.objects.all()
+    return render(request, 'servergroups.html', {'groups': groups})
