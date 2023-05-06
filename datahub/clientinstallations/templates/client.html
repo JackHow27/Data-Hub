@@ -9,15 +9,17 @@
             <th>Version</th>
             <th>Environment</th>
             <th>URL</th>
+            <th>Relationship Manager</th>
             </tr>
         </thead>
         <tbody>
             {% for product in client.applications.all%}
             <tr>
-                <td>{{ product.product }}</td>
+                <td><a href="{% url 'app' product.id %}">{{ product.product }}</a></td>
                 <td>{{ product.version }}</td>
                 <td>{{ product.environment }}</td>
                 <td><a href="https://{{ product.url }}">{{ product.url }}</a></td>
+                <td>{{ product.relationshipmanager }}</td>
             </tr>
             {% empty %}
             <tr>
@@ -26,5 +28,5 @@
             {% endfor %}
         </tbody>
     </table>
-
+</section>
 {% endblock %}

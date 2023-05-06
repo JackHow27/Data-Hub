@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <section>
+    <h1><a href="{% url 'client' app.client.id %}">{{app.client}}</a> {{app.product}} {{app.environment}}</h1>
+</section>
+<section>
+    <h2><strong>App Details</strong></h2>
+    <table>
+        <thread>
+            <tr>
+                <th>Product</th>
+                <th>Environment</th>
+                <th>Version</th>
+                <th>Client</th>
+                <th>URL</th>
+                <th>Relationship Manager</th>
+                <th>Live</th>
+            </tr> 
+        </thread>
+        <tbody>
+            <tr>
+                <td>{{ app.product }}</td>
+                <td>{{ app.environment }}</td>
+                <td>{{ app.version }}</td>
+                <td>{{ app.client }}</td>
+                <td><a href="https://{{ app.url }}">{{ app.url }}</a></td>
+                <td>{{ app.relationshipmanager }}</td>
+                <td>{{ app.live }}</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+<section>
+    <h2>Upgrade History</h2>
+    <table>
+        <thread>
+            <tr>
+                <th>Upgrade Date/Time</th>
+                <th>Version From</th>
+                <th>Version To</th>
+                <th>Engineer</th>
+                <th>Note</th>
+            </tr>
+        </thread>
+    </table>
+</section>
+<section>
+    <h2>Customisations</h2>
+    <table>
+        <tr>
+            <th>Customisation ID</th>
+            <th>Customisation Language</th>
+            <th>ADO Link</th>
+            <th>Ticket Link</th>
+            <th>Expiry</th>
+        </tr>
+    </table>
+</section>
+{% endblock %}
