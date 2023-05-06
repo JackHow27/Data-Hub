@@ -12,7 +12,7 @@ def base(request):
     return render(request, 'base.html')
 
 def clients(request):
-    clients = client.objects.all()
+    clients = Client.objects.all()
     return render(request, 'clients.html', {'clients': clients})
 
 class client_detail(View):
