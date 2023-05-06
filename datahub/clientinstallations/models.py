@@ -5,7 +5,7 @@ class ApplicationInstance(models.Model):
         ('ECOI','ECOI'),
         ('CCR','CCR'),
         ('IAR','IAR'),
-        ('Mobile','Mobile')
+        ('Mobile','Mobile'),
         ('User Management', 'User Management')
     ])
     environment = models.CharField(max_length=50)
@@ -43,7 +43,7 @@ class Server(models.Model):
         ('DC', 'DC'),
         ('FTP', 'FTP'),
         ('SMTP', 'SMTP'),
-        ('WebProxy', 'WebProxy')
+        ('WebProxy', 'WebProxy'),
         ('Other','Other')
     ] )
     trustlevel = models.CharField(max_length=50, choices=[
@@ -52,6 +52,6 @@ class Server(models.Model):
         ('High','High')
     ])
     description = models.CharField(max_length=200, null=True, blank=True)
-    ServerGroup = models.ManyToManyField('ServerGroup', on_delete=models.CASCADE, related_name='servers')
+    ServerGroup = models.ManyToManyField('ServerGroup')
     
 

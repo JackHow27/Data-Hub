@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Server Group List</h2>
+    {%for group in groups%}
+        <section>
+            <h2><a href="{% url 'servergroup' group.id %}">{{ group.name }}</a></h2>
+            <table>
+                <thread>
+                    <tr>
+                        <th>Server Name</th>
+                        <th>Server Role</th>
+                        <th>Internal IPv4</th>
+                        <th>External IPv4</th>
+                        <th>Trust Level</th>
+                    </tr>
+                </thread>
+                <tbody>
+                    {%for server in group.servers.all%}
+                      <tr>
+                        <td><a href="{% url 'server' server.id %}">{{ server.name }}</a></td>
+                        <td>{{ server.role }}</td>
+                        <td>{{ server.internalipv4}}</td>
+                        <td>{{ server.externalipv4}}</td>
+                        <td>{{ server.trustlevel}}</td>
+                      </tr>
+                    {%empty%}
+                      <tr>
+                        <td colspan="3">No Servers :(</td>
+                      </tr>
+                    {%endfor%}
+                  </tbody>
+            </table>
+        </section>
+    {%endfor%}
+{% endblock %}
