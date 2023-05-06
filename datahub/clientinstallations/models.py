@@ -4,7 +4,9 @@ class ApplicationInstance(models.Model):
     product = models.CharField(max_length=50, choices=[
         ('ECOI','ECOI'),
         ('CCR','CCR'),
-        ('IAR','IAR')
+        ('IAR','IAR'),
+        ('Mobile','Mobile')
+        ('User Management', 'User Management')
     ])
     environment = models.CharField(max_length=50)
     url = models.CharField(max_length=200)
@@ -12,6 +14,7 @@ class ApplicationInstance(models.Model):
     client = models.ForeignKey('client', on_delete=models.CASCADE, related_name='applications')
     relationshipmanager = models.CharField(max_length=200, null=True, blank=True)
     live = models.BooleanField(default=False)
+    server = models.ManyToManyField('Server', blank=True, null=True)
 
 class Client(models.Model):
     name = models.CharField(max_length=200)
@@ -25,3 +28,30 @@ class Contact(models.Model):
     jobtitle = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
     client = models.ForeignKey('client', on_delete=models.CASCADE, related_name='contacts')
+
+class ServerGroup(models.Model):
+    name = models.CharField(max_length=100)
+
+class Server(models.Model):
+    name = models.CharField(max_length=100)
+    internalipv4 = models.CharField(max_length=100)
+    externalipv4 = models.CharField(max_length=100, null=True, blank=True)
+    role = models.CharField(max_length=100, choices=[
+        ('WebServer', 'WebServer'),
+        ('Database','Database'),
+        ('Services','Services'),
+        ('DC', 'DC'),
+        ('FTP', 'FTP'),
+        ('SMTP', 'SMTP'),
+        ('WebProxy', 'WebProxy')
+        ('Other','Other')
+    ] )
+    trustlevel = models.CharField(max_length=50, choices=[
+        ('Low','Low'),
+        ('Medium','Medium'),
+        ('High','High')
+    ])
+    description = models.CharField(max_length=200, null=True, blank=True)
+    ServerGroup = models.ManyToManyField('ServerGroup', on_delete=models.CASCADE, related_name='servers')
+    
+
