@@ -15,7 +15,7 @@
         <tbody>
             {% for product in client.applications.all%}
             <tr>
-                <td><a href="{% url 'application' product.id %}"></a>{{ product.product }}</td>
+                <td><a href="{% url 'app' product.id %}">{{ product.product }}</a></td>
                 <td>{{ product.version }}</td>
                 <td>{{ product.environment }}</td>
                 <td><a href="https://{{ product.url }}">{{ product.url }}</a></td>
@@ -28,5 +28,5 @@
             {% endfor %}
         </tbody>
     </table>
-
+</section>
 {% endblock %}
