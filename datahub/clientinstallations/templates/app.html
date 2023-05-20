@@ -1,39 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    <section>
-    <h1><a href="{% url 'client' app.client.id %}">{{app.client}}</a> {{app.product}} {{app.environment}}</h1>
-</section>
+<h2><a href="{% url 'client' app.client.id %}">{{app.client}}</a> {{app.product}} {{app.environment}}</h2>
 <section>
     <h2><strong>App Details</strong></h2>
-    <table>
-        <thread>
-            <tr>
-                <th>Product</th>
-                <th>Environment</th>
-                <th>Version</th>
-                <th>Client</th>
-                <th>URL</th>
-                <th>Relationship Manager</th>
-                <th>Live</th>
-            </tr> 
-        </thread>
-        <tbody>
-            <tr>
-                <td>{{ app.product }}</td>
-                <td>{{ app.environment }}</td>
-                <td>{{ app.version }}</td>
-                <td>{{ app.client }}</td>
-                <td><a href="https://{{ app.url }}">{{ app.url }}</a></td>
-                <td>{{ app.relationshipmanager }}</td>
-                <td>{{ app.live }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <form action="{% url 'update_app' app.id %}" method="POST">
+        {% csrf_token %}
+        <label for="product">Product:</label>
+        <select id="product" name="product">
+          <option value="ECOI" {% if app.product == 'ECOI' %}selected{% endif %}>ECOI</option>
+          <option value="CCR" {% if app.product == 'CCR' %}selected{% endif %}>CCR</option>
+          <option value="IAR" {% if app.product == 'IAR' %}selected{% endif %}>IAR</option>
+          <option value="Mobile" {% if app.product == 'Mobile' %}selected{% endif %}>Mobile</option>
+          <option value="User Management" {% if app.product == 'User Management' %}selected{% endif %}>User Management</option>
+        </select>
+      
+        <label for="environment">Environment:</label>
+        <input type="text" id="environment" name="environment" value="{{ app.environment }}">
+      
+        <label for="version">Version:</label>
+        <input type="text" id="version" name="version" value="{{ app.version }}">
+      
+        <label for="url">URL:</label>
+        <input type="text" id="url" name="url" value="{{ app.url }}">
+      
+        <label for="relationshipmanager">Relationship Manager Email:</label>
+        <input type="text" id="relationshipmanager" name="relationshipmanager" value="{{ app.relationshipmanager }}">
+
+        <label for="live">Live?</label>
+        <input type="checkbox" id="live" name="live" {% if app.live %}checked{% endif %}/>
+        <label for="live"></label>
+
+        <label for="button"></label>
+        <button type="submit">Update</button>
+      </form>
 </section>
 <section>
     <h2>Upgrade History</h2>
+    <button id="addUpgradeBtn">Add Upgrade</button>
+    <button id="editUpgradeBtn">Edit Upgrade</button>
     <table>
         <thread>
             <tr>
@@ -48,6 +53,8 @@
 </section>
 <section>
     <h2>Customisations</h2>
+    <button id="addCustomBtn">Add Customisation</button>
+    <button id="editCustomBtn">Edit Customisation</button>
     <table>
         <tr>
             <th>Customisation ID</th>
