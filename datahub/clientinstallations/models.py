@@ -61,7 +61,7 @@ class Customisation(models.Model):
     ticketlink = models.CharField(max_length=100)
     
 class Upgrade(models.Model):
-    app = models.ForeignKey('ApplicationInstance', on_delete=models.CASCADE, related_name="upgrades")
+    app = models.ForeignKey('ApplicationInstance', on_delete=models.CASCADE, related_name="upgrades", default=1)
     upgradedate = models.DateTimeField()
     versionfrom = models.CharField(max_length=50)
     versionto = models.CharField(max_length=50)
