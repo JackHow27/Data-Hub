@@ -17,8 +17,8 @@
           {% for client in clients%}
             <tr>
               <td>
-                <input type="checkbox" id="{{ product.id }}" title="Select App">
-                <label for="{{ product.id }}"></label>
+                <input type="checkbox" id="{{ client.id }}" title="Select App">
+                <label for="{{ client.id }}"></label>
               </td>
               <td><a href="{% url 'client' client.id %}">{{ client.name }}</a></td>
               <td>{{ client.shortcode }}</td>
