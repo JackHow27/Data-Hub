@@ -53,6 +53,11 @@ class Server(models.Model):
     ])
     description = models.CharField(max_length=200, null=True, blank=True)
     ServerGroup = models.ManyToManyField('ServerGroup')
+
+class Customisation(models.Model):
+    language = models.CharField(max_length=50)
+    adolink = models.CharField(max_length=100)
+    ticketlink = models.CharField(max_length=100)
     
 class Upgrade(models.Model):
     upgradedate = models.DateTimeField()
