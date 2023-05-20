@@ -4,9 +4,12 @@
 <h2>{{client}}</h2>
 <section>
     <h2>Applications</h2>
+    <button id="addAppBtn">Add Application</button>
+    <button id="rmvAppBtn">Remove Application</button>
     <table>
         <thead>
             <tr>
+            <th>Select</th>
             <th>Product</th>
             <th>Version</th>
             <th>Environment</th>
@@ -17,11 +20,15 @@
         <tbody>
             {% for product in client.applications.all%}
             <tr>
+                <td>
+                    <input type="checkbox" id="{{ product.id }}" title="Select App">
+                    <label for="{{ product.id }}"></label>
+                </td>
                 <td><a href="{% url 'app' product.id %}">{{ product.product }}</a></td>
                 <td>{{ product.version }}</td>
                 <td>{{ product.environment }}</td>
                 <td><a href="https://{{ product.url }}">{{ product.url }}</a></td>
-                <td>{{ product.relationshipmanager }}</td>
+                <td><a href="https://teams.microsoft.com/l/chat/0/0?users={{ product.relationshipmanager}}"target="_blank">{{ product.relationshipmanager }}</a></td>
             </tr>
             {% empty %}
             <tr>

@@ -2,10 +2,13 @@
 
 {% block content %}
 <h2>Clients</h2>
-<section>
+<section>  
+<button id="addClientBtn">Add Client</button>
+<button id="rmvClientBtn">Remove Client</button>
     <table>
         <thead>
           <tr>
+            <th>Select</th>
             <th>Client</th>
             <th>Shortcode</th>
           </tr>
@@ -13,9 +16,12 @@
         <tbody>
           {% for client in clients%}
             <tr>
-              <td>{{ client.name }}</td>
+              <td>
+                <input type="checkbox" id="{{ product.id }}" title="Select App">
+                <label for="{{ product.id }}"></label>
+              </td>
+              <td><a href="{% url 'client' client.id %}">{{ client.name }}</a></td>
               <td>{{ client.shortcode }}</td>
-              <td><a href="{% url 'client' client.id %}">View Details</a></td>
             </tr>
           {% empty %}
             <tr>
