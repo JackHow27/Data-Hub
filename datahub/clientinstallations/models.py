@@ -54,4 +54,10 @@ class Server(models.Model):
     description = models.CharField(max_length=200, null=True, blank=True)
     ServerGroup = models.ManyToManyField('ServerGroup')
     
-
+class Upgrade(models.Model):
+    upgradedate = models.DateTimeField()
+    versionfrom = models.CharField(max_length=50)
+    versionto = models.CharField(max_length=50)
+    engineer = models.CharField(max_length=100)
+    ticketlink = models.CharField(max_length=100)
+    note = models.CharField(max_length=300)
