@@ -55,11 +55,13 @@ class Server(models.Model):
     ServerGroup = models.ManyToManyField('ServerGroup')
 
 class Customisation(models.Model):
+    app = models.ForeignKey('ApplicationInstance', on_delete=models.CASCADE, related_name="customisations")
     language = models.CharField(max_length=50)
     adolink = models.CharField(max_length=100)
     ticketlink = models.CharField(max_length=100)
     
 class Upgrade(models.Model):
+    app = models.ForeignKey('ApplicationInstance', on_delete=models.CASCADE, related_name="upgrades")
     upgradedate = models.DateTimeField()
     versionfrom = models.CharField(max_length=50)
     versionto = models.CharField(max_length=50)
