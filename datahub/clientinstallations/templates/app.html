@@ -41,13 +41,31 @@
     <button id="editUpgradeBtn">Edit Upgrade</button>
     <table>
         <thread>
+            <thead>
             <tr>
+                <th></th>
                 <th>Upgrade Date/Time</th>
                 <th>Version From</th>
                 <th>Version To</th>
                 <th>Engineer</th>
                 <th>Note</th>
             </tr>
+        </thead>
+            <tbody>
+                {% for upgrade in app.upgrades.all%}
+                <tr>
+                    <td>
+                        <input type="radio" id="{{ upgrade.id }}" title="Select Upgrade">
+                        <label for="{{ upgrade.id }}"></label>
+                    </td>
+                    <td>{{upgrade.upgradedate}}</td>
+                    <td>{{upgrade.versionfrom}}</td>
+                    <td>{{upgrade.versionto}}</td>
+                    <td>{{upgrade.engineer}}</td>
+                    <td>{{upgrade.note}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </thread>
     </table>
 </section>
